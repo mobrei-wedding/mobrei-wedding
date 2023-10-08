@@ -159,8 +159,8 @@ function generatePdfSentence(title, content){
     return {
 		italics: false,
 		text: [
-			{text: title + "：\n", style: 'itemTitle', bold: true},
-			{text: " - " + content+ "\n", style: 'itemContext', bold: false},
+			{text: " - " + title + "：\n", style: 'itemTitle', bold: true},
+			{text: "   " + content+ "\n", style: 'itemContext', bold: false},
 			'\n'
 		]
 	}
@@ -243,7 +243,8 @@ function buildPdf(context) {
       defaultStyle: {
         font: 'AaGuDianKeBenSong',
         fontSize: 11,
-        color: '#595553'
+        color: '#595553',
+        lineHeight: 1.2,
       },
       styles: {
         header: {
