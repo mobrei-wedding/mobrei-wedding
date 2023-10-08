@@ -4,6 +4,16 @@ $(document).ready(function() {
     renderBill();
  });
 
+ $('#download-report').click(function () {
+    downloadPdf(pdfDocument);
+});
+
+$('#test-report').click(function () {
+    var pdfContext = generatePdfContext();
+    pdfDocument = buildPdf(pdfContext);
+    openPdf(pdfDocument);
+});
+
 
 function calculateProduct(){
     // 周邊總價
@@ -132,6 +142,247 @@ function endSection() {
             sectionDiv.remove();
         }
     })
+}
+
+function pdfHeader(title){
+    return  { 
+        alignment: 'center',
+        text: `Report #${title}`,
+        style: 'header',
+        fontSize: 23,
+        bold: true,
+        margin: [0, 10],
+    }
+}
+
+function generatePdfSentence(title, content){
+    return {
+		italics: false,
+		text: [
+			{text: title + "：\n", style: 'itemTitle', bold: true},
+			{text: " - " + content+ "\n", style: 'itemContext', bold: false},
+			'\n'
+		]
+	}
+
+}
+
+function generateUlItem(key, value){
+    return {
+		italics: false,
+		ul: [
+            {text: key+ "\n"},
+            [
+                {
+                    text:  value+ "\n"
+                },
+            ]
+        ],
+        text:  [{text: value+ "\n"}],
+	}
+
+}
+
+function generateSection(title, content){
+    return {
+		italics: false,
+		text: [
+			{text: title + "\n", style: 'h4', bold: true},
+			{text: content+ "\n", style: 'p'},
+			'\n'
+		]
+	}
+}
+function getBillData(){
+    var refreshTable = [];
+    var productPrice = 0;
+    for (var property in product_data){
+        var obj = product_data[property];
+        if(obj.quantity){
+            var amount = obj.quantity * obj.price;
+            productPrice += amount;
+            refreshTable.push({'項目': obj.title, '單價':obj.price, '數量':obj.quantity, '總價': amount })
+        }
+    }
+    return {
+        billData: refreshTable,
+        total: productPrice,
+    };
+}
+
+function buildPdf(context) {
+    pdfMake.fonts = {
+        Roboto: {
+          normal: 'Roboto-Regular.ttf',
+          bold: 'Roboto-Medium.ttf',
+          italics: 'Roboto-Italic.ttf',
+          bolditalics: 'Roboto-Italic.ttf'
+        },
+        AaGuDianKeBenSong: {
+          normal: 'AaGuDianKeBenSong.ttf',
+          bold: 'AaGuDianKeBenSong.ttf',
+          italics: 'AaGuDianKeBenSong.ttf',
+          bolditalics: 'AaGuDianKeBenSong.ttf'
+        },
+        FangZhengShuSongFanTi: {
+            normal: 'FangZhengShuSongFanTi.ttf',
+            bold: 'FangZhengShuSongFanTi.ttf',
+            italics: 'FangZhengShuSongFanTi.ttf',
+            bolditalics: 'FangZhengShuSongFanTi.ttf'
+         },
+         characters: {
+            normal: 'characters.ttf',
+            bold: 'characters.ttf',
+            italics: 'characters.ttf',
+            bolditalics: 'characters.ttf'
+         },
+          
+      };
+    var docDefinition = {
+      content: context,
+      defaultStyle: {
+        font: 'characters',
+        fontSize: 11,
+        color: '#595553'
+      },
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true
+        },
+        itemTitle: {
+          fontSize: 12,
+        },
+        itemContext:{
+          color: '#595553'
+        },
+        "p": {
+          "marginTop": 11
+        },
+        "ul": {
+          "marginTop": 11
+        },
+        "ol": {
+          "marginTop": 11
+        },
+        "h1": {
+          "marginTop": 36,
+          "fontSize": 36
+        },
+        "h2": {
+          "fontSize": 24,
+          "marginTop": 10
+        },
+        "h3": {
+          "fontSize": 20,
+          "bold": true,
+          "italics": true,
+          "marginTop": 10
+        },
+        "h4": {
+            "fontSize": 15,
+            "bold": true,
+            "marginTop": 10
+          }
+      }
+      
+      
+  };
+  return docDefinition;
+
+    // pdfMake.createPdf(docDefinition).open();
+}
+
+function openPdf(pdfDoc){
+    pdfMake.createPdf(pdfDoc).open();
+}
+
+function downloadPdf(pdfDoc){
+    pdfMake.createPdf(pdfDoc).download();
+}
+function generatePdfContext(){
+    var emailEntry = document.getElementById('Widget658159440').value;
+    var nameEntry = document.getElementById('Widget1439048663').value;
+    var digit3Entry = document.getElementById('Widget981692748').value;
+    var allergyEntry = document.getElementById('Widget1043102370').value;
+    var emergencyEntry = document.getElementById('Widget1827994924').value;
+    
+    var preference = function() {
+        var v;
+        $('[name="entry.18356239"]').each(function() {
+            if($(this).prop('checked') === true) v = $(this).val();
+        });
+        return v;
+    };
+    var preferenceEntry = preference();
+
+    var withFriendsEntry = document.getElementById('Widget1226046570').value;
+    var questionOrThoughts = document.getElementById('Widget1388002876').value;
+    var toTheTeam = document.getElementById('Widget1496947901').value;
+
+    // get bill data
+    var orderData = getBillData()
+    var billTable = buildPdfTable(orderData.billData, bill_col_data);
+    var context = [
+        pdfHeader(emailEntry), 
+        generatePdfSentence('暱稱', nameEntry), 
+        generatePdfSentence('信箱', emailEntry), 
+        generatePdfSentence('手機末三碼', digit3Entry), 
+        generatePdfSentence('有無對食物過敏', allergyEntry), 
+        generatePdfSentence('緊急聯絡人', emergencyEntry), 
+        generatePdfSentence('希望多與摳色互動嗎？', preferenceEntry), 
+        generatePdfSentence('有希望被分配在同桌的親友嗎？', withFriendsEntry), 
+        generatePdfSentence('對婚禮的期待或者想提的問題？', questionOrThoughts), 
+        generatePdfSentence('給籌備組的話', toTheTeam), 
+        generateSection('以下為您的訂購明細：', ''), 
+        billTable];
+    return context;
+}
+
+function buildPdfTableBody(data, columns) {
+    var body = [];
+
+    body.push(columns);
+    // columns.push(...data);
+
+    data.forEach(function(row) {
+        var dataRow = [];
+
+        columns.forEach(function(column) {
+            var cell = {
+                borderColor: ['#ffffff', '#000000', '#ffffff', '#616676'],
+                text: row[column],
+            }
+
+            dataRow.push(cell);
+        })
+
+        body.push(dataRow);
+    });
+
+    return body;
+}
+
+function buildPdfTable(data, columns) {
+    return {
+        style: 'tableStyle',
+        layout: {
+            // fillColor: function (rowIndex, node, columnIndex) {
+            //     return (rowIndex === 0) ? '#c2dec2' : null;
+            // },
+            // hLineColor: function (i, node) {
+            //     return (i === 0) ? 'white' : 'white';
+            // // },
+            // hLineColor: 'white',
+            // vLineColor: 'white',
+        },
+        table: {
+            widths: ['25%', '25%', '25%', '25%'],
+            heights: 20, 
+            headerRows: 1,
+            body: buildPdfTableBody(data, columns)
+        }
+    };
 }
 
 function getSectionsItems(){
@@ -401,10 +652,13 @@ function submitForm(frm, secid, callback) {
         "entry.653167275": "please be healthy",
         'pageHistory': '0,1'
       }
+    
+    var pdfContext = generatePdfContext();
+    pdfDocument = buildPdf(pdfContext);
+
 
       
     var data = getData();
-    console.log(data);
     $.ajax({
         type: 'POST',
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
@@ -527,6 +781,7 @@ function validate(frm, secid) {
     }
     return invalids.length;
 }
+
 function gotoSection(frm = {}, secid, deftrg) {
     var doc = this.getDocument();
     var trg;
@@ -559,6 +814,7 @@ function gotoSection(frm = {}, secid, deftrg) {
     }
     jumptoSection(frm, secid, deftrg, trg);
 }
+
 function updateProduct(enid, val, close) {
     product_data[enid].quantity = val ? val: 0;
     
@@ -620,8 +876,6 @@ this.renderProduct = function (enid, val) {
         
     }
 }
-
-
 
 
 function generateProductInnterHtml(product){
@@ -693,9 +947,6 @@ function  showProduct(iid) {
     document.body.style.overflowY = 'hidden';
 
 }
-
-
-
 
 
 function validateEngine(itm, frmdata, reportError) {
