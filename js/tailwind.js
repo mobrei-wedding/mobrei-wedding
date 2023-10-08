@@ -4,6 +4,7 @@ $(document).ready(function() {
     renderBill();
  });
 
+
 function calculateProduct(){
     // 周邊總價
     var sum = 0;
@@ -303,6 +304,12 @@ function getSectionsItems(){
                 "entryType": "radio",
                 "entryId": "450550785"
             }, 
+            {
+                // bring ID cards
+               "id": "1565424873",
+               "entryType": "radio",
+               "entryId": "63787071"
+              }, 
             {
                 // information done
                 "id": "1666827740",
