@@ -143,20 +143,24 @@ function getSectionsItems(){
                 "id": "1439048663",
                 "type": "",
                 "entryType": "text",
-                "entryId": "1068526554"
+                "entryId": "1068526554",
             },
             {
                 // email
                 "id": "658159440",
                 "entryType": "text",
-                "entryId": "883070371"
+                "entryId": "883070371",
+                "regex": "^(.+)@(.+)$",
+                "errorMsg": "請再確認一次信箱格式～"
                 
             },
             {
                 // 3 digits
                 "id": "981692748",
                 "entryType": "text",
-                "entryId": "1053365713"
+                "entryId": "1053365713",
+                "regex": "^[0-9]{3}$",
+                "errorMsg": "格式為三位半形數字喔～"
                 
             },
             {
@@ -179,6 +183,12 @@ function getSectionsItems(){
                 "id": "929329530",
                 "entryType": "radio",
                 "entryId": "1841292804"
+            },
+            {
+                // little helper
+                "id": "36699560",
+                "entryType": "radio",
+                "entryId": "1339607071"
             },
             {
                 // payment method
@@ -400,149 +410,6 @@ function submitForm(frm, secid, callback) {
         }
     });
 
-
-
-
-    // this.showMessage(secid);
-    // var curr = this;
-
-    // var fc = curr.data.facade || {};
-
-    // if (fc.formfillable && fc.formfillable.consent && this.consentAgreed != true) {
-    //     this.consentDialog();
-    //     return false;
-    // }
-
-    // curr.submitting = Promise.resolve(curr.saving).then(function () {
-    //     var pairs = {};
-    //     var formData = new FormData(frm);
-    //     var next, entry;
-    //     var entries = formData.entries();
-    //     while ((next = entries.next()) && next.done === false) {
-    //         entry = next.value;
-    //         var val = pairs[entry[0]];
-    //         if (val)
-    //             val.push(entry[1]);
-    //         else if (entry[1])
-    //             pairs[entry[0]] = [entry[1]];
-    //     }
-    //     var forTask = {
-    //         draftSeq: true, submitSeq: true, paymentId: true, consumerId: true,
-    //         products: true, quantity: true, amount: false, email: false, phone: false
-    //     };
-    //     for (var tnm in forTask) {
-    //         var tval = forTask[tnm];
-    //         if (pairs[tnm])
-    //             pairs[tnm] = pairs[tnm];
-    //         else if (tval == true)
-    //             pairs[tnm] = curr.draft[tnm];
-    //         else if (tnm && tval) {
-    //             if (tnm == 'phone')
-    //                 pairs[tnm] = tval;
-    //             else if (tval == 'emailAddress')
-    //                 pairs[tnm] = curr.draft.emailAddress;
-    //             else {
-    //                 var tent = curr.data.scraped.items[tval];
-    //                 pairs[tnm] = tent ? curr.draft.entry[tent.entry] : null;
-    //             }
-    //         }
-    //     }
-    //     pairs.pageHistory = curr.getPageHistory();
-    //     if (curr.draft.responseId)
-    //         pairs.responseId = curr.draft.responseId;
-    //     if (curr.config.plan == 'blocked')
-    //         pairs.plan = 'blocked';
-    //     curr.stat('submitting');
-    //     if (window.gtag) window.gtag('event', 'submit', {
-    //         event_category: 'formfacade',
-    //         event_label: curr.data.request.params.publishId,
-    //         value: curr.draft.pageHistory.length
-    //     });
-    //     return curr.sendData(pairs);
-    // }).then(rs => {
-    //     return Promise.resolve(callback ? callback(rs) : null)
-    //         .then(pass => rs).catch(fail => rs);
-    // }).then(rs => {
-    //     var publishId = curr.data.request.params.publishId;
-    //     curr.stat('goal');
-    //     curr.result = rs;
-    //     if (rs && rs.code == 200) {
-    //         curr.createCookie('ff-' + publishId, '', -1);
-    //         if (rs.submitSeq) {
-    //             curr.draft.submitSeq = rs.submitSeq;
-    //             curr.draft.submitted = new Date().getTime();
-    //         }
-    //         var smtxt;
-    //         var submitto = 'default';
-    //         var fc = curr.data.facade;
-    //         if (fc && fc.submit && fc.submit[secid]) {
-    //             var itmsubmit = fc.submit[secid];
-    //             if (itmsubmit.js) {
-    //                 try {
-    //                     eval(itmsubmit.js);
-    //                 }
-    //                 catch (err) {
-    //                     console.error(itmsubmit.js + ' failed due to ' + err);
-    //                 }
-    //             }
-    //             if (itmsubmit.submitto)
-    //                 submitto = itmsubmit.submitto;
-    //             else if (fc.whatsapp && fc.whatsapp.phone)
-    //                 submitto = 'whatsapp';
-    //             else if (itmsubmit.onsubmit)
-    //                 submitto = itmsubmit.onsubmit;
-    //             if (submitto == 'custom') {
-    //                 if (itmsubmit.messageMark)
-    //                     curr.result.messageMark = itmsubmit.messageMark;
-    //                 else
-    //                     curr.result.messagePlain = itmsubmit.message;
-    //             }
-    //             if (submitto == 'ifmsg') {
-    //                 var iftmpl = '${computeCondition("' + secid + '")}';
-    //                 curr.result.messageMark = curr.calculateEngine(iftmpl);
-    //                 if (!curr.result.messageMark) curr.result.messageMark = '(No message)';
-    //             }
-    //             else if (submitto == 'redirect' && itmsubmit.redirect) {
-    //                 var reurl = curr.computeField(itmsubmit.redirect);
-    //                 if (reurl)
-    //                     window.top.location.href = reurl.trim();
-    //                 else
-    //                     console.error(itmsubmit.redirect + ' is not a redirection url');
-    //                 return;
-    //             }
-    //             else if (submitto == 'whatsapp' && itmsubmit.wamsg) {
-    //                 smtxt = curr.computeField(itmsubmit.wamsg);
-    //             }
-         
-    //         }
-          
-    //         curr.scrollIntoView();
-    //         curr.getDocument().querySelectorAll('.ff-payment-form')
-    //             .forEach(elm => elm.style.display = 'none');
-    //     }
-    //     else if (rs && rs.code) {
-    //         curr.getDocument().querySelectorAll('#ff-submit-' + secid + ' img').forEach(function (elm) {
-    //             elm.src = 'https://neartail.com/img/send.svg';
-    //         });
-    //         throw new Error('Not able to update this response in Google Forms');
-    //         frm.action = 'https://docs.google.com/forms/d/e/' + publishId + '/viewform';
-    //         frm.method = 'GET';
-    //         frm.submit();
-    //     }
-    //     else {
-    //         formFacade.render();
-    //     }
-    //     var onsubmit = curr.data.request.query.onsubmit;
-    //     if (window.cartSidebar) cartSidebar.fetch('submit');
-    //     if (window.facadeListener) facadeListener.onChange('submit', curr);
-    //     if (onsubmit && window[onsubmit]) {
-    //         window[onsubmit](curr);
-    //     }
-    // }).catch(function (err) {
-    //     curr.showError('Submit failed', err);
-    //     curr.submitting = null;
-    // });
-
     return false;
 }
 
@@ -597,6 +464,7 @@ function validate(frm, secid) {
             }
         }
         var envalue;
+    
         var valid = true;
         if (widinp) {
             if (widinp.readOnly) {
@@ -607,26 +475,33 @@ function validate(frm, secid) {
             else
                 valid = widinp.checkValidity();
             envalue = frmdata.get(widinp.name);
+            
+            // check custom regex
+            if(envalue && itm.regex){
+                console.log("hey");
+                var regex = new RegExp(`${itm.regex}`);
+                valid = regex.test(envalue);
+            }
+            
         }
         // name = entry.1068526554
         // id = Widget1439048663
         if (valid == false) {
-            //&& !envalue
-            if (widinp.hasAttribute('required')) {
+            if (widinp.hasAttribute('required') && !envalue) {
                 // reportError(curr.lang('This is a required question'));
-                reportError('這是必填問題');
+                reportError('這是必填問題喔！');
             }
             else if (envalue) {
-                if (widinp.type == 'email'){
+                if (itm.errorMsg){
                     // reportError(curr.lang('Must be a valid email address'));
-                    reportError('信箱格式錯誤');
+                    reportError(itm.errorMsg);
                 }
                 else{
                     reportError('格式錯誤');
                 }
             }
             else {
-                reportError('格式錯誤');
+                reportError('好像有東西出錯了');
             }
         }
         else if (widinp && widinp.list && envalue && itm.choices) {
@@ -782,7 +657,7 @@ function generateProductInnterHtml(product){
 <div class="prdwdg">
         <div class="col-qty">
         
-            <label>Select Quantity</label>
+            <label>請選擇數量</label>
         
           <ul>
             ${itemList}
