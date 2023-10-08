@@ -619,7 +619,7 @@ this.renderProduct = function (enid, val) {
 
 function generateProductInnterHtml(product){
     var itemList = ""
-    for(var i=1; i< 9; i++){
+    for(var i=1; i< 10; i++){
         var item = "";
        
         if (draft.entry[product.product_id] && draft.entry[product.product_id] == i){
