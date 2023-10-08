@@ -69,18 +69,6 @@ jQuery(document).ready(function($) {
       pdfMake.createPdf(docDefinition).open();
   }
 
-    function uploadFile(){
-      // https://developers.google.com/drive/api/guides/manage-uploads#node.js
-      const CLIENT_ID = '955584819573-me0ppca4jmu52vmoaso9cqffaeea9rvf.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyAuJXrDFNMqlbBM8LVefMDsdf2Qd2jnppc';
-      // Discovery doc URL for APIs used by the quickstart
-      const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
-
-      // Authorization scopes required by the API; multiple scopes can be
-      // included, separated by spaces.
-      const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
-    }
-
     
     $('#report').click(function () {
         // downloadPdf();
