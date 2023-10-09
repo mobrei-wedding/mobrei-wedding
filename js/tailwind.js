@@ -5,16 +5,24 @@ $(document).ready(function() {
  });
 
 $('#download-report').click(function () {
-    downloadPdf(pdfDocument);
+    // downloadPdf(pdfDocument);
+    openPdf(pdfDocument);
 });
 
 $('#test-report').click(function () {
     var pdfContext = generatePdfContext();
     pdfDocument = buildPdf(pdfContext);
-    // openPdf(pdfDocument);
-    sendEmail();
-
+    openPdf(pdfDocument);
 });
+
+function sendPdfToEmail(receiver){
+    var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
+    var pdfDocObj = pdfDocGenerator.getBase64((data) => {
+    });
+    pdfDocObj.then(function(result) {
+        sendEmail(result, receiver);
+   });
+}
 async function uploadFile(pdfDoc) {
 	// var fileContent = 'Hello World'; // As a sample, upload a text file.
     var fileContent = pdfMake.createPdf(pdfDoc);
@@ -288,6 +296,12 @@ function buildPdf(context) {
           
       };
     var docDefinition = {
+      info: {
+        title: 'Report',
+        author: 'One And Only One',
+        subject: 'MobRei wedding Register Form',
+        keywords: 'MobRei Wedding',
+    },
       content: context,
       defaultStyle: {
         font: 'characters',
@@ -347,7 +361,7 @@ function openPdf(pdfDoc){
 }
 
 function downloadPdf(pdfDoc){
-    pdfMake.createPdf(pdfDoc).download('register_details.pdf');
+    pdfMake.createPdf(pdfDoc).download('report.pdf');
 }
 function generatePdfContext(){
     var emailEntry = document.getElementById('Widget658159440').value;
