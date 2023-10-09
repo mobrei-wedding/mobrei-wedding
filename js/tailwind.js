@@ -11,7 +11,8 @@ $('#download-report').click(function () {
 $('#test-report').click(function () {
     var pdfContext = generatePdfContext();
     pdfDocument = buildPdf(pdfContext);
-    openPdf(pdfDocument);
+    // openPdf(pdfDocument);
+    sendEmail();
 
 });
 async function uploadFile(pdfDoc) {
@@ -272,7 +273,7 @@ function buildPdf(context) {
     var docDefinition = {
       content: context,
       defaultStyle: {
-        font: 'AaGuDianKeBenSong',
+        font: 'characters',
         fontSize: 11,
         color: '#595553',
         lineHeight: 1.2,
@@ -330,7 +331,7 @@ function openPdf(pdfDoc){
 }
 
 function downloadPdf(pdfDoc){
-    pdfMake.createPdf(pdfDoc).download();
+    pdfMake.createPdf(pdfDoc).download('register_details.pdf');
 }
 function generatePdfContext(){
     var emailEntry = document.getElementById('Widget658159440').value;
