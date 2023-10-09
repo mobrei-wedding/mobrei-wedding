@@ -542,6 +542,20 @@ function getSectionsItems(){
                 
             },
             {
+                // addr
+                "id": "1686927898",
+                "entryType": "text",
+                "entryId": "896231682",
+                
+            },
+            {
+                // addr receiver
+                "id": "1691582630",
+                "entryType": "text",
+                "entryId": "111610196",
+                
+            },
+            {
                 // allergy
                 "id": "1043102370",
                 "type": "PARAGRAPH_TEXT",
