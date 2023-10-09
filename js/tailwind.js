@@ -316,7 +316,6 @@ function buildPdf(context) {
       
   };
   return docDefinition;
-
     // pdfMake.createPdf(docDefinition).open();
 }
 
