@@ -256,12 +256,6 @@ function buildPdf(context) {
           italics: 'AaGuDianKeBenSong.ttf',
           bolditalics: 'AaGuDianKeBenSong.ttf'
         },
-        FangZhengShuSongFanTi: {
-            normal: 'FangZhengShuSongFanTi.ttf',
-            bold: 'FangZhengShuSongFanTi.ttf',
-            italics: 'FangZhengShuSongFanTi.ttf',
-            bolditalics: 'FangZhengShuSongFanTi.ttf'
-         },
          characters: {
             normal: 'characters.ttf',
             bold: 'characters.ttf',
