@@ -365,7 +365,7 @@ header: {
 	    },
 	    // Invoice Title
 		invoiceTitle: {
-			fontSize: 22,
+			fontSize: 12,
 			bold: true,
 			alignment:'right',
 			margin:[0,0,0,15]
