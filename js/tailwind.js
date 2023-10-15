@@ -393,11 +393,13 @@ function buildPdf(context) {
 		// Invoice Details
 		invoiceSubTitle: {
 			fontSize: 10,
-			alignment:'right'
+			alignment:'right',
+            color: '#aaacaa'
 		},
 		invoiceSubValue: {
 			fontSize: 10,
-			alignment:'right'
+			alignment:'right',
+            color: '#aaacaa'
 		},
 		// Billing Headers
 		invoiceBillingTitle: {
@@ -416,7 +418,7 @@ function buildPdf(context) {
 		},
 		invoiceBillingAddressTitle: {
 		    margin: [0,7,0,3],
-            fontSize: 13,
+            fontSize: 12,
 		    bold: true
 		},
 		invoiceBillingAddress: {
@@ -618,14 +620,13 @@ function generatePdfHeader(email, name){
                                     text:'e-mail #', 
                                     style:'invoiceSubTitle',
                                     width: '*',
-                                    color: 'gray'
                                     
                                 }, 
                                 {
                                     text: email,
                                     style:'invoiceSubValue',
                                     width: 100,
-                                    color: 'gray'
+                                    
                                     
                                 }
                                 ]
@@ -636,13 +637,11 @@ function generatePdfHeader(email, name){
                                    text:'填寫日期',
                                    style:'invoiceSubTitle',
                                    width: '*',
-                                   color: 'gray'
                                }, 
                                {
                                    text: getToday(),
                                    style:'invoiceSubValue',
                                    width: 100,
-                                   color: 'gray'
                                }
                                ]
                        },
@@ -652,13 +651,11 @@ function generatePdfHeader(email, name){
                                    text:'填寫人暱稱',
                                    style:'invoiceSubTitle',
                                    width: '*',
-                                   color: 'gray'
                                }, 
                                {
                                    text: name,
                                    style:'invoiceSubValue',
                                    width: 100,
-                                   color: 'gray'
                                }
                                ]
                        },
@@ -922,7 +919,7 @@ function buildPdfTableFooter(productSum, registerFee, finalPrice) {
             ],
             [ 
                 {
-                    text:'總費用',
+                    text:'= 總費用',
                     style:'itemsFooterTotalTitle'
                 }, 
                 {
