@@ -507,25 +507,27 @@ function buildPdf(context) {
 function generatePdfContext(){
     var emailEntry = document.getElementById('Widget658159440').value;
     var nameEntry = document.getElementById('Widget1439048663').value;
-    var digit3Entry = document.getElementById('Widget981692748').value;
-    var allergyEntry = document.getElementById('Widget1043102370').value;
-    var emergencyEntry = document.getElementById('Widget1827994924').value;
+    // var digit3Entry = document.getElementById('Widget981692748').value;
+    // var allergyEntry = document.getElementById('Widget1043102370').value;
+    // var emergencyEntry = document.getElementById('Widget1827994924').value;
 
     var rsvpName = document.getElementById('Widget111610196').value;
     var rsvpAddr = document.getElementById('Widget896231682').value;
     
-    var preference = function() {
-        var v;
-        $('[name="entry.18356239"]').each(function() {
-            if($(this).prop('checked') === true) v = $(this).val();
-        });
-        return v;
-    };
-    var preferenceEntry = preference();
+    // var preference = function() {
+    //     var v;
+    //     $('[name="entry.18356239"]').each(function() {
+    //         if($(this).prop('checked') === true) v = $(this).val();
+    //     });
+    //     return v;
+    // };
+    // var preferenceEntry = preference();
 
-    var withFriendsEntry = document.getElementById('Widget1226046570').value;
-    var questionOrThoughts = document.getElementById('Widget1388002876').value;
-    var toTheTeam = document.getElementById('Widget1496947901').value;
+    // var withFriendsEntry = document.getElementById('Widget1226046570').value;
+    // var questionOrThoughts = document.getElementById('Widget1388002876').value;
+    // var toTheTeam = document.getElementById('Widget1496947901').value;
+
+
     // get bill header 
     var billHeaderContext = generatePdfBillHeader(rsvpName, rsvpAddr);
     // get bill data
@@ -541,26 +543,27 @@ function generatePdfContext(){
         generateSection('您的購買明細如下：', ''), 
         billTable,
         billTableFooter,
-        {   text:'\n',
-            pageBreak: 'after'},
-        generatePdfSecondPageHeader(emailEntry, nameEntry), 
+        ...footerNote,
+        // {   text:'',
+        //     pageBreak: 'after'},
+        // generatePdfSecondPageHeader(emailEntry, nameEntry), 
         
-        '\n\n',
-        generatePdfItem('手機末三碼', digit3Entry), 
-        '\n',
-        generatePdfItem('有無對食物過敏', allergyEntry), 
-        '\n',
-        generatePdfItem('緊急聯絡人', emergencyEntry), 
-        '\n',
-        generatePdfItem('希望多與摳色互動嗎？', preferenceEntry), 
-        '\n',
-        generatePdfItem('有希望被分配在同桌的親友嗎？', withFriendsEntry), 
-        '\n',
-        generatePdfItem('對婚禮的期待或者想提的問題？', questionOrThoughts), 
-        '\n',
-        generatePdfItem('給籌備組的話', toTheTeam), 
-        '\n\n\n',
-        ...footerNote
+        // '\n\n',
+        // generatePdfItem('手機末三碼', digit3Entry), 
+        // '\n',
+        // generatePdfItem('有無對食物過敏', allergyEntry), 
+        // '\n',
+        // generatePdfItem('緊急聯絡人', emergencyEntry), 
+        // '\n',
+        // generatePdfItem('希望多與摳色互動嗎？', preferenceEntry), 
+        // '\n',
+        // generatePdfItem('有希望被分配在同桌的親友嗎？', withFriendsEntry), 
+        // '\n',
+        // generatePdfItem('對婚禮的期待或者想提的問題？', questionOrThoughts), 
+        // '\n',
+        // generatePdfItem('給籌備組的話', toTheTeam), 
+        // '\n\n\n',
+        
         ];
     return context;
 }
@@ -751,11 +754,11 @@ function generatePdfBillHeader(receiverName, receiverAddr){
     return [
         {
 	        columns: [
-	            {
-	                text: '新人',
-	                style:'invoiceBillingTitle',
+	            // {
+	            //     text: '新人',
+	            //     style:'invoiceBillingTitle',
 	                
-	            },
+	            // },
 	            {
 	                text: '來賓姓名',
 	                style:'invoiceBillingTitle',
@@ -766,10 +769,10 @@ function generatePdfBillHeader(receiverName, receiverAddr){
 	    // Billing Details
 	    {
 	        columns: [
-	            {
-	                text: '影山茂夫/靈幻新隆',
-	                style: 'invoiceBillingDetails'
-	            },
+	            // {
+	            //     text: '影山茂夫/靈幻新隆',
+	            //     style: 'invoiceBillingDetails'
+	            // },
 	            {
 	                text: receiverName+'\n',
 	                style: 'invoiceBillingDetails'
@@ -779,10 +782,10 @@ function generatePdfBillHeader(receiverName, receiverAddr){
 	    // Billing Address Title
 	    {
 	        columns: [
-	            {
-	                text: '婚禮地址',
-	                style: 'invoiceBillingAddressTitle'
-	            },
+	            // {
+	            //     text: '婚禮地址',
+	            //     style: 'invoiceBillingAddressTitle'
+	            // },
 	            {
 	                text: '來賓收件地址',
 	                style: 'invoiceBillingAddressTitle'
@@ -792,10 +795,10 @@ function generatePdfBillHeader(receiverName, receiverAddr){
 	    // Billing Address
 	    {
 	        columns: [
-	            {
-	                text: '四婁café 幸福廳',
-	                style: 'invoiceBillingAddress'
-	            },
+	            // {
+	            //     text: '四婁café 幸福廳',
+	            //     style: 'invoiceBillingAddress'
+	            // },
 	            {
 	                text: receiverAddr,
 	                style: 'invoiceBillingAddress'
@@ -925,7 +928,7 @@ function buildPdfNote(){
         color: 'red',
     },
     { 
-        text: '此表單僅作為填寫證明 \n 請注意後續有無收到報名匯款通知',
+        text: '此表單僅作為填寫證明，請注意後續有無收到報名匯款通知',
         style:'notesText',
         decoration: 'underline',
         // decorationStyle: 'wavy',
