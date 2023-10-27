@@ -593,6 +593,7 @@ function generatePdfTitle(){
 
 // PDF: Header
 function generatePdfHeader(email, name, refId){
+    var cellWidth = 120;
     return {
         columns: [
             // {
@@ -625,7 +626,7 @@ function generatePdfHeader(email, name, refId){
                              {
                                  text: 'ref. #' + refId,
                                  style:'invoiceSubValue',
-                                 width: 100,
+                                 width: cellWidth,
                                  
                                  
                              }
@@ -642,7 +643,7 @@ function generatePdfHeader(email, name, refId){
                                 {
                                     text: email,
                                     style:'invoiceSubValue',
-                                    width: 100,
+                                    width: cellWidth,
                                     
                                     
                                 }
@@ -658,7 +659,7 @@ function generatePdfHeader(email, name, refId){
                                {
                                    text: getToday(),
                                    style:'invoiceSubValue',
-                                   width: 100,
+                                   width: cellWidth,
                                }
                                ]
                        },
@@ -672,7 +673,7 @@ function generatePdfHeader(email, name, refId){
                                {
                                    text: name,
                                    style:'invoiceSubValue',
-                                   width: 100,
+                                   width: cellWidth,
                                }
                                ]
                        },
