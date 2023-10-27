@@ -11,8 +11,8 @@ $('#download-report').click(function () {
 $('#test-report').click(function () {
     var pdfContext = generatePdfContext();
     pdfDocument = buildPdf(pdfContext);
-    // openPdf(pdfDocument);
-    uploadFile(pdfDocument);
+    openPdf(pdfDocument);
+
 });
 async function uploadFile(pdfDoc) {
 	// var fileContent = 'Hello World'; // As a sample, upload a text file.
@@ -44,39 +44,6 @@ async function uploadFile(pdfDoc) {
 	xhr.send(form);
 }
 
-function start() {
-    const CLIENT_ID = '955584819573-me0ppca4jmu52vmoaso9cqffaeea9rvf.apps.googleusercontent.com';
-    const API_KEY = 'AIzaSyAuJXrDFNMqlbBM8LVefMDsdf2Qd2jnppc';
-    // Discovery doc URL for APIs used by the quickstart
-    const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
-    // 2. Initialize the JavaScript client library.
-    gapi.client.init({
-      'apiKey': API_KEY,
-      // Your API key will be automatically added to the Discovery Document URLs.
-      'discoveryDocs': [
-        'https://people.googleapis.com/$discovery/rest',
-        'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-      // clientId and scope are optional if auth is not required.
-      'clientId': CLIENT_ID,
-      //https://www.googleapis.com/auth/drive.file
-      'scope': 'https://www.googleapis.com/auth/drive',
-    }).then(function() {
-      // 3. Initialize and make the API request.
-    //   return gapi.client.people.people.get({
-    //     'resourceName': 'people/me',
-    //     'requestMask.includeField': 'person.names'
-    //   });
-
-    //   gapi.client.request({path:'/upload/drive/v3/files', method: 'POST', params: {uploadType: 'media'}, body: "hey"})
-
-    }).then(function(response) {
-      console.log(response.result);
-    }, function(reason) {
-      console.log('Error: ' + reason.result.error.message);
-    });
-  };
-  // 1. Load the JavaScript client library.
-  gapi.load('client', start);
 
 
 function calculateProduct(){
