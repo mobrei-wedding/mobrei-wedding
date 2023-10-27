@@ -93,9 +93,11 @@
   <link rel="preconnect" href="https://cdn.com/" crossorigin="">
   <link rel="preconnect" href="https://com/" crossorigin="">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="screen">
-
+  
   <style></style>
-
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.56/pdfmake.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.4/vfs_fonts.min.js"></script>
+ <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -1238,18 +1240,6 @@
                       </div>
 
 
-
-                      <div class="ff-form-check">
-                        <input class="ff-form-check-input" type="radio" name="entry.451787920" id="entry.451787920.行動支付"
-                          onclick="entr=451787920; if(draft.entry[entr]==this.value){ delete draft.entry[entr]; this.checked=false; saveDraft(); }"
-                          value="行動支付">
-                        <label class="ff-form-check-label" for="entry.451787920.行動支付">
-                          行動支付
-                        </label>
-                      </div>
-
-
-
                       <div onclick="document.getElementById('entry.451787920.other_option_response').click()"
                         class="ff-form-check ff-form-check-other ff-pointer-cursor">
                         <input class="ff-form-check-input ff-pointer-disable" type="radio"
@@ -1984,16 +1974,11 @@
 
                       <span class="ff-required">*</span>
 
-
-
-
-                      <i class="ff-editwidget material-icons">
-                        settings
-                      </i>
-
                     </label>
 
-                    <small id="Static957187906" class="ff-help-empty ff-help form-text mdViewer"></small>
+                    <small id="Static957187906" class="ff-help-empty ff-help form-text mdViewer">
+                      如果有傳說中黃黑配色的他們，會帶來意想不到的運氣喔～
+                    </small>
 
 
 
@@ -2023,6 +2008,45 @@
                   </div>
 
                   <div class="rest-form-group ff-item   ff-multiple_choice ff-full-width  ff-item-noprd"
+                  id="ff-id-1565424873">
+
+                  <label class="ff-item-qs " for="Widget1565424873">
+
+                    考量到可能發生緊急狀態如送醫急救等，希望大家能記得帶上證件保護自己
+
+                    <span class="ff-required">*</span>
+
+
+
+
+                  </label>
+
+                  <small id="Static1565424873" class="ff-help-empty ff-help form-text mdViewer"></small>
+
+
+                  <div class="ff-widget-control ff-check-table ">
+
+
+                    <div class="ff-form-check">
+                      <input class="ff-form-check-input" type="radio" name="entry.63787071"
+                        id="entry.63787071.好的！"
+                        onclick="entr=63787071; if(draft.entry[entr]==this.value){ delete draft.entry[entr]; this.checked=false; saveDraft(); }"
+                        value="好的！" required="">
+                      <label class="ff-form-check-label" for="entry.63787071.好的！">
+                        好的！
+                      </label>
+                    </div>
+
+
+                  </div>
+
+
+
+                  <div id="Error63787071" class="ff-widget-error"></div>
+                </div>
+
+                
+                  <div class="rest-form-group ff-item   ff-multiple_choice ff-full-width  ff-item-noprd"
                     id="ff-id-1666827740">
 
                     <label class="ff-item-qs " for="Widget1666827740">
@@ -2041,11 +2065,6 @@
                     </label>
 
                     <small id="Static1666827740" class="ff-help-empty ff-help form-text mdViewer"></small>
-
-
-
-
-
 
 
                     <div class="ff-widget-control ff-check-table ">
@@ -2069,6 +2088,10 @@
                     <div id="Error1666827740" class="ff-widget-error"></div>
                   </div>
 
+
+             
+
+                  
                   <div class="rest-form-group ff-item   ff-paragraph_text ff-full-width  ff-item-noprd"
                     id="ff-id-1388002876">
 
@@ -2206,8 +2229,9 @@
 
      
     </section>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
       <script
-      data-main="js/tailwind.js" src="js/require.js" ></script>
+      data-main="js/tailwind.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" ></script>
       <script src="js/custom_post_api.js"></script>
 
     <footer class="footer">
@@ -2227,10 +2251,8 @@
 
     </footer>
 
-
-
-
   </div>
+  
 
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
