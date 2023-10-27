@@ -2395,12 +2395,12 @@ pre {
 
 #ff-addprd-popup .prdfooter .prddel {
   --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+  background-color: var(--ff-primary-700);
 }
 
 #ff-addprd-popup .prdfooter .prddel:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+  background-color: rgb(198 105 96 / var(--tw-bg-opacity));
 }
 
 #ff-addprd-popup.active {
