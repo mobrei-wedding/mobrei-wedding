@@ -146,6 +146,11 @@ video {
   fill: #fff;
 }
 
+.svg-logo-container {
+  text-align: center;
+  /* height: 80px; */
+}
+
 /* END SVG STYLES */
 
 .ff-section {
@@ -1420,6 +1425,7 @@ a.ff-powered-img img {
 .text-center {
   text-align: center;
 }
+
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -4214,3 +4220,9 @@ hr {
 }
 
 /* END LINEAR SCALE STYLES */
+
+/* Start custom */
+.copyright {
+
+  margin: .3em;
+}
