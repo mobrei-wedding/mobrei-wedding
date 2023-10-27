@@ -2360,6 +2360,20 @@ pre {
   width: fit-content;
 }
 
+#ff-addprd-popup .prdhelp {
+  margin-top: 1em;
+}
+
+#ff-addprd-popup .prdinfo {
+  margin-top: 15px;
+  /* float: right; */
+  width: -moz-fit-content;
+  width: fit-content;
+  font-style: italic;
+  font-size: 12px;
+  color: #616676;
+}
+
 #ff-addprd-popup .prdfooter:empty {
   display: none;
 }

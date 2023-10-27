@@ -1419,23 +1419,29 @@ function generateProductInnterHtml(product){
     var header = `     
     <div class="prdheader">
 	<div class="prdtitle">${product.title}</div>
-	<div class="prdhelp">
-		
-			NT$${product.price}
-	</div>
+
+        <div class="prdhelp">
+                NT$${product.price}
+        </div>
+        <div class="prdinfo">	
+            尺寸：${product.size}<br>
+            材質：${product.material}
+        </div>
+
     
 	<div class="prdclose" onclick="closePopup(false)">
-		<span class="material-icons">close</span>
+    <img src="./data/icon/close.svg" class="material-icons">
+
 	</div>
 </div>
 	
 <div>
-	
+
 <div class="prdwdg">
         <div class="col-qty">
         
-            <label>請選擇數量</label>
-        
+            <!--<label>請選擇數量</label>-->
+            
           <ul>
             ${itemList}
           </ul>
