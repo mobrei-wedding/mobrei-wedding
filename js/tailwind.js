@@ -72,7 +72,7 @@ function start() {
     }).then(function(response) {
       console.log(response.result);
     }, function(reason) {
-      console.log('Error: ' + reason);
+      console.log('Error: ' + reason.result.error.message);
     });
   };
   // 1. Load the JavaScript client library.
