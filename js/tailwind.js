@@ -4,15 +4,79 @@ $(document).ready(function() {
     renderBill();
  });
 
- $('#download-report').click(function () {
+$('#download-report').click(function () {
     downloadPdf(pdfDocument);
 });
 
 $('#test-report').click(function () {
     var pdfContext = generatePdfContext();
     pdfDocument = buildPdf(pdfContext);
-    openPdf(pdfDocument);
+    // openPdf(pdfDocument);
+    uploadFile(pdfDocument);
 });
+async function uploadFile(pdfDoc) {
+	// var fileContent = 'Hello World'; // As a sample, upload a text file.
+    var fileContent = pdfMake.createPdf(pdfDoc);
+	// var file = new Blob([fileContent], { type: 'text/plain' });
+    var file = new Blob([fileContent], { type: 'application/octetstream' });
+    
+	var metadata = {
+		'name': 'sample-file-via-js', // Filename at Google Drive
+		'mimeType': 'application/octetstream', // mimeType at Google Drive
+		// TODO [Optional]: Set the below credentials
+		// Note: remove this parameter, if no target is needed
+		'parents': ['1Av9rul-em5omaFixJM-LDOgOjVF7PLra'], // Folder ID at Google Drive which is optional
+	};
+
+	var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
+	var form = new FormData();
+	form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+	form.append('file', file);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('post', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id');
+	xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+	xhr.responseType = 'json';
+	xhr.onload = () => {
+		document.getElementById('content').innerHTML = "File uploaded successfully. The Google Drive file id is <b>" + xhr.response.id + "</b>";
+		document.getElementById('content').style.display = 'block';
+	};
+	xhr.send(form);
+}
+
+function start() {
+    const CLIENT_ID = '955584819573-me0ppca4jmu52vmoaso9cqffaeea9rvf.apps.googleusercontent.com';
+    const API_KEY = 'AIzaSyAuJXrDFNMqlbBM8LVefMDsdf2Qd2jnppc';
+    // Discovery doc URL for APIs used by the quickstart
+    const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
+    // 2. Initialize the JavaScript client library.
+    gapi.client.init({
+      'apiKey': API_KEY,
+      // Your API key will be automatically added to the Discovery Document URLs.
+      'discoveryDocs': [
+        'https://people.googleapis.com/$discovery/rest',
+        'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+      // clientId and scope are optional if auth is not required.
+      'clientId': CLIENT_ID,
+      //https://www.googleapis.com/auth/drive.file
+      'scope': 'https://www.googleapis.com/auth/drive',
+    }).then(function() {
+      // 3. Initialize and make the API request.
+    //   return gapi.client.people.people.get({
+    //     'resourceName': 'people/me',
+    //     'requestMask.includeField': 'person.names'
+    //   });
+
+    //   gapi.client.request({path:'/upload/drive/v3/files', method: 'POST', params: {uploadType: 'media'}, body: "hey"})
+
+    }).then(function(response) {
+      console.log(response.result);
+    }, function(reason) {
+      console.log('Error: ' + reason);
+    });
+  };
+  // 1. Load the JavaScript client library.
+  gapi.load('client', start);
 
 
 function calculateProduct(){
