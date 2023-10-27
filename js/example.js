@@ -2,8 +2,6 @@
 var canvasElement = document.getElementById("canvas");
 
 var dd = {
-
-
 header: {
     columns: [
       { text: 'HEADER LEFT', style: 'documentHeaderLeft' },
