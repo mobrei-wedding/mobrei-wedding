@@ -183,6 +183,14 @@ video {
   color: var(--ff-gray-900);
 }
 
+p.ff-title-description {
+  font-family: var(--ff-heading-font) !important;
+  font-size: 1em !important;
+  line-height: 1.5em !important;
+  color: var(--ff-gray-900);
+  text-align: center;
+}
+
 :is(.dark .ff-title),:is(.dark  .ff-section-header) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
