@@ -14,12 +14,14 @@ $('#test-report').click(function () {
     openPdf(pdfDocument);
 });
 
-function sendPdfToEmail(receiver){
+// receiver=null
+function sendPdfToEmail(){
+    var timestamp = Date.now();
     var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
     var pdfDocObj = pdfDocGenerator.getBase64((data) => {
     });
     pdfDocObj.then(function(result) {
-        sendEmail(result, receiver);
+        sendEmail(result, timestamp);
    });
 }
 
@@ -1237,7 +1239,6 @@ function submitForm(frm, secid, callback) {
     var pdfData = generatePdfContext();
     pdfDocument = buildPdf(pdfData);
     var formData = getData()
-    console.log("formDat:", formData);
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
 
     $.ajax({
@@ -1249,6 +1250,7 @@ function submitForm(frm, secid, callback) {
         complete: function() {
             alert('資料已送出！');
             endSection();
+            sendPdfToEmail();
         }
     });
 
