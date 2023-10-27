@@ -1,6 +1,93 @@
 jQuery(document).ready(function($) {
     'use strict';
     // #submit
+
+    function downloadPdf(context) {
+      pdfMake.fonts = {
+          Roboto: {
+            normal: 'Roboto-Regular.ttf',
+            bold: 'Roboto-Medium.ttf',
+            italics: 'Roboto-Italic.ttf',
+            bolditalics: 'Roboto-Italic.ttf'
+          },
+          AaGuDianKeBenSong: {
+            normal: 'AaGuDianKeBenSong.ttf',
+            bold: 'AaGuDianKeBenSong.ttf',
+            italics: 'AaGuDianKeBenSong.ttf',
+            bolditalics: 'AaGuDianKeBenSong.ttf'
+          },
+            
+        };
+      var docDefinition = {
+        content: [
+            {text:"必須要說捏.ABCDLKJ"}
+        ],
+        defaultStyle: {
+          font: 'AaGuDianKeBenSong',
+          fontSize: 11,
+          color: '#595553'
+        },
+        styles: {
+          header: {
+            fontSize: 18,
+            bold: true
+          },
+          itemTitle: {
+            fontSize: 12,
+          },
+          itemContext:{
+            color: '#595553'
+          },
+          "p": {
+            "marginTop": 11
+          },
+          "ul": {
+            "marginTop": 11
+          },
+          "ol": {
+            "marginTop": 11
+          },
+          "h1": {
+            "marginTop": 36,
+            "fontSize": 36
+          },
+          "h2": {
+            "fontSize": 24,
+            "marginTop": 10
+          },
+          "h3": {
+            "fontSize": 20,
+            "bold": true,
+            "italics": true,
+            "marginTop": 10
+          }
+        }
+        
+        
+    };
+  
+      pdfMake.createPdf(docDefinition).open();
+  }
+
+    function uploadFile(){
+      // https://developers.google.com/drive/api/guides/manage-uploads#node.js
+      const CLIENT_ID = '955584819573-me0ppca4jmu52vmoaso9cqffaeea9rvf.apps.googleusercontent.com';
+      const API_KEY = 'AIzaSyAuJXrDFNMqlbBM8LVefMDsdf2Qd2jnppc';
+      // Discovery doc URL for APIs used by the quickstart
+      const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+    }
+
+    
+    $('#report').click(function () {
+        // downloadPdf();
+    });
+
+    
+    
     $('#ff-submit-119400280').on('click', function() {
       
       // 暱稱
