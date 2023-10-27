@@ -241,7 +241,7 @@ function buildPdf(context) {
     var docDefinition = {
       content: context,
       defaultStyle: {
-        font: 'characters',
+        font: 'AaGuDianKeBenSong',
         fontSize: 11,
         color: '#595553'
       },
@@ -322,10 +322,10 @@ function generatePdfContext(){
 
     // get bill data
     var orderData = getBillData()
-    var billTable = buildPdfTable(orderData.billData, bill_col_data);
+    var billTable = buildPdfTable(orderData, bill_col_data);
     var context = [
         pdfHeader(emailEntry), 
-        generatePdfSentence('暱稱', nameEntry), 
+        generatePdfSentence('名字', nameEntry), 
         generatePdfSentence('信箱', emailEntry), 
         generatePdfSentence('手機末三碼', digit3Entry), 
         generatePdfSentence('有無對食物過敏', allergyEntry), 
@@ -334,23 +334,31 @@ function generatePdfContext(){
         generatePdfSentence('有希望被分配在同桌的親友嗎？', withFriendsEntry), 
         generatePdfSentence('對婚禮的期待或者想提的問題？', questionOrThoughts), 
         generatePdfSentence('給籌備組的話', toTheTeam), 
-        generateSection('以下為您的訂購明細：', ''), 
+        generateSection('您的購買明細如下：', ''), 
         billTable];
     return context;
 }
 
 function buildPdfTableBody(data, columns) {
     var body = [];
+    var styledColumns = columns.map(column=>{
+        return {
+            borderColor: ['#ffffff', '#ffffff', '#ffffff', '#b0aeae'],
+            text: column,
+        }
+    })
 
-    body.push(columns);
+    body.push(styledColumns);
     // columns.push(...data);
-
-    data.forEach(function(row) {
+    var details = data.billData;
+    var productPrice = data.total;
+    details.forEach(function(row) {
         var dataRow = [];
 
         columns.forEach(function(column) {
             var cell = {
-                borderColor: ['#ffffff', '#000000', '#ffffff', '#616676'],
+                borderColor: ['#ffffff', '#ffffff', '#ffffff', '#b0aeae'],
+                fontSize: 9,
                 text: row[column],
             }
 
@@ -359,6 +367,75 @@ function buildPdfTableBody(data, columns) {
 
         body.push(dataRow);
     });
+    var row = [
+        {text: '',
+        border: [false, false, false, false]}, {text: '',
+        border: [false, false, false, false]}, {text: '',
+        border: [false, false, false, false]}, {text: '',
+        border: [false, false, false, false]}
+    ]
+    var row1 = [
+        {
+            text: '周邊總價',
+            border: [false, false, false, false],
+            colSpan: 3,
+            fontSize: 11,
+            bold: true
+        }, 
+        { 
+        },
+        {
+        },
+        {
+            text: 'NT$ '+productPrice.toString(),
+            border: [false, false, false, false],
+            fontSize: 11,
+            bold: true
+        }
+    ];
+    var row2 = [
+        {
+            text: '報名費',
+            border: [false, false, false, false],
+            colSpan: 3,
+            fontSize: 11,
+            bold: true
+        }, 
+        { 
+        },
+        {
+        },
+        {
+            text: 'NT$ 1125',
+            border: [false, false, false, false],
+            fontSize: 11,
+            bold: true
+        }
+    ];
+    var finalPrice = productPrice + 1125;
+    var row3 = [
+        {
+            text: '總費用',
+            border: [false, false, false, false],
+            colSpan: 3,
+            fontSize: 11,
+            bold: true
+        }, 
+        { 
+        },
+        {
+        },
+        {
+            text: 'NT$ ' + finalPrice.toString(),
+            border: [false, false, false, false],
+            fontSize: 11,
+            bold: true
+        }
+    ];
+    body.push(row);
+    body.push(row1);
+    body.push(row2);
+    body.push(row3);
 
     return body;
 }
