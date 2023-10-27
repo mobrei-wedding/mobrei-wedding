@@ -1166,6 +1166,12 @@ function getSectionsItems(){
                 "entryId": "1160286542"
             }, 
             {   
+                // note: wishes
+                "id": "780521456",
+                "entryType": "text",
+                "entryId": "189841679"
+            }, 
+            {   
                 // note: Q or thoughts
                 "id": "1388002876",
                 "entryType": "text",
