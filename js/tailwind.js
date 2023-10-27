@@ -14,14 +14,12 @@ $('#test-report').click(function () {
     openPdf(pdfDocument);
 });
 
-// receiver=null
-function sendPdfToEmail(){
-    var timestamp = Date.now();
+function sendPdfToEmail(receiver){
     var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
     var pdfDocObj = pdfDocGenerator.getBase64((data) => {
     });
     pdfDocObj.then(function(result) {
-        sendEmail(result, timestamp);
+        sendEmail(result, receiver);
    });
 }
 
@@ -1230,6 +1228,10 @@ function getData(){
   dataSet['pageHistory'] = '0,1';
   return dataSet;
 }
+function getUserEmail(){
+    var email = document.getElementById('Widget658159440').value;
+    return email;
+}
 
 function submitForm(frm, secid, callback) {
     var invalids = secid == '-3' ? 0 : validate(frm, secid);
@@ -1239,6 +1241,7 @@ function submitForm(frm, secid, callback) {
     var pdfData = generatePdfContext();
     pdfDocument = buildPdf(pdfData);
     var formData = getData()
+    var email = getUserEmail()
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
 
     $.ajax({
@@ -1250,7 +1253,7 @@ function submitForm(frm, secid, callback) {
         complete: function() {
             alert('資料已送出！');
             endSection();
-            sendPdfToEmail();
+            sendPdfToEmail(email);
         }
     });
 
