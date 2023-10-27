@@ -27,10 +27,10 @@ function sendEmail(attachment, receiver) {
 		From : "mobrei.wedding@gmail.com",
 		Bcc : ["mobrei.wedding@gmail.com"],
 		Subject : subject,
-		Body : `賓客您好，茂靈2539婚禮茶會的籌備組已收到您的報名，附件為您的報名購買明細，主辦方與您各持有一份，此信為系統自動寄信，不需回覆。<br>
-		若茶會確定進行，主辦方將寄送匯款通知信，敬請留意信箱，感謝您。<br><br>
+		Body : `賓客您好，<br>茂靈2539婚禮茶會的籌備組已收到您的報名，附件為您的報名購買明細，主辦方與您各持有一份，此信為系統自動寄信，不需回覆。<br><br>
+		若成功報名且茶會確定舉行，主辦方將寄送匯款通知信，再請您留意信箱，感謝您。<br><br>
 		<br>
-		如有需要進行修正，請聯絡籌備組官方帳號: <strong>mobrei.wedding@gmail.com</strong><br><br>
+		如有需要進行報名細項的修正，請聯絡籌備組官方信箱: <strong>mobrei.wedding@gmail.com</strong><br><br>
 		《One And Only One》 茂靈婚禮茶會籌備組<br>`,
 		Attachments : [
 			{
