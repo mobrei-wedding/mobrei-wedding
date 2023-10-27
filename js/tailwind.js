@@ -45,7 +45,30 @@ async function uploadFile(pdfDoc) {
 	xhr.send(form);
 }
 
+function updateBillVars(productTotalSum, productTotalQuantity, totalPrice){
+    // id and entry
+    var productSumEle = document.getElementById("ff-id-2046362136");
+    // var productTotalQuantityEle =  document.getElementById("ff-id-2139224654");
+    // var totalPriceEle =  document.getElementById("ff-id-2139224654");
 
+
+    // productSumEle.value = productTotalSum;
+    // productTotalQuantityEle.value = productTotalQuantity;
+    // totalPriceEle.value = totalPrice;
+
+    // display
+    var displayProductSum = document.getElementById("Display2046362136");
+    var displayQuantity = document.getElementById("Display2139224654");
+    var displayTotal = document.getElementById("Display1588677463");
+
+    displayProductSum.value = productTotalSum;
+    displayQuantity.value = productTotalQuantity;
+    displayTotal.value = totalPrice;
+
+    productSumEle.value = productTotalSum;
+
+
+}
 
 function calculateProduct(){
     // 周邊總價
@@ -55,6 +78,7 @@ function calculateProduct(){
     var displayProductSum = document.getElementById("Display2046362136");
     var displayQuantity = document.getElementById("Display2139224654");
     var displayTotal = document.getElementById("Display1588677463");
+    
     // list
     var listEle = document.getElementById("ff-id-1959728480");
     for (var property in product_data){
@@ -65,9 +89,10 @@ function calculateProduct(){
         }
     }
     displayProductSum.value = sum;
-    displayTotal.value = sum+1125;
+    displayTotal.value = sum + 1125;
     sumEle.value = sum;
     displayQuantity.value = quantity;
+
 
 }
 
@@ -148,8 +173,6 @@ function getPreviousSectionId(secid) {
 }
 
 function jumptoSection(frm, secid, deftrg, trg, wid) {
-    //just for testing
-    getData();
 
     var sections = getSectionsItems();
     sections.forEach(section=>{
@@ -596,27 +619,27 @@ function getSectionsItems(){
                 "entryType": "custom",
             }, 
             {
-                // display: price
+                // display: product total price
                 "id": "2046362136",
-                "entryType": "display",
+                "entryType": "bill-display",
                 "entryId": "575052231"
             }, 
             {
-               // display: quantity
+               // display: product total quantity
                 "id": "2139224654",
-                "entryType": "display",
+                "entryType": "bill-display",
                 "entryId": "253014823"
             }, 
             {
-                // display: fee
+                // display: register fee
                 "id": "855092565",
-                "entryType": "display",
+                "entryType": "",
                 "entryId": "1423911485"
             }, 
             {
                 // display: sum 
                 "id": "1588677463",
-                "entryType": "display",
+                "entryType": "bill-display",
                 "entryId": "1725694623"
             }, 
             {
@@ -712,7 +735,10 @@ function getData(){
             value = product_data[item.id].quantity;
             name = product_data[item.id].quantity_id
             
-        }else {
+        }else if(item.entryType=="bill-display"){
+            value = $(`#Display${item.id}`).val() || 0;
+        }
+        else {
             value = $(`[name="${name}"]`).val() || '';
         }
         dataSet[name] = value;
@@ -759,9 +785,6 @@ function submitForm(frm, secid, callback) {
     var pdfContext = generatePdfContext();
     pdfDocument = buildPdf(pdfContext);
 
-
-      
-    var data = getData();
     $.ajax({
         type: 'POST',
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
@@ -842,7 +865,6 @@ function validate(frm, secid) {
             
             // check custom regex
             if(envalue && itm.regex){
-                console.log("hey");
                 var regex = new RegExp(`${itm.regex}`);
                 valid = regex.test(envalue);
             }
