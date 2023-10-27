@@ -1199,6 +1199,7 @@ function getData(){
     var items = section.items;
     items.forEach(item=>{
         var name = "entry." + item.entryId;
+       
         var value = "";
         if(item.entryType=="radio"){
             var checkeVal = function() {
@@ -1219,6 +1220,7 @@ function getData(){
         else {
             value = $(`[name="${name}"]`).val() || '';
         }
+        console.log("entry:", name, "value:", value);
         dataSet[name] = value;
 
     })
@@ -1235,6 +1237,7 @@ function submitForm(frm, secid, callback) {
     var pdfData = generatePdfContext();
     pdfDocument = buildPdf(pdfData);
     var formData = getData()
+    console.log("formDat:", formData);
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
 
     $.ajax({
