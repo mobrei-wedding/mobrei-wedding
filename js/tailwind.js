@@ -1232,13 +1232,15 @@ function submitForm(frm, secid, callback) {
     if (invalids > 0) return;
     if (this.submitting) return;
     
-    var data = generatePdfContext();
-    pdfDocument = buildPdf(data);
+    var pdfData = generatePdfContext();
+    pdfDocument = buildPdf(pdfData);
+    var formData = getData()
+// https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
 
     $.ajax({
         type: 'POST',
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
-        data: getData(),
+        data: formData,
         contentType: 'application/json',
         dataType: 'jsonp',
         complete: function() {
