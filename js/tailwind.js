@@ -97,9 +97,9 @@ function renderBill(){
             </thead><tbody>`;
         
     var allRows = [];
-    for (var property in product_data){
+    for (var property of shoppingCart){
         var obj = product_data[property];
-        if(obj.quantity){
+        // if(obj.quantity){
             var amount = obj.quantity * obj.price;
             var row = '<tr>'+
             '<td>'+obj.title+'</td>'+
@@ -108,7 +108,7 @@ function renderBill(){
             '<td>'+amount+'</td>'+
             '</tr>';
             allRows.push(row);
-        }
+        // }
     }
     
     var productPrice = document.getElementById("ff-id-2046362136").value;
@@ -1384,15 +1384,33 @@ function gotoSection(frm = {}, secid, deftrg) {
     jumptoSection(frm, secid, deftrg, trg);
 }
 
+function removeItemFromShoppingCart(item){
+    var index = shoppingCart.indexOf(item);
+    if (index !== -1) {
+        shoppingCart.splice(index, 1);
+    }
+}
+
+function updateItemFromShoppingCart(item){
+    var index = shoppingCart.indexOf(item);
+    if (index !== -1) {
+        shoppingCart[index] = item;
+    }else {
+        shoppingCart.push(item);
+    }
+}
+
 function updateProduct(enid, val, close) {
     product_data[enid].quantity = val ? val: 0;
     
     if (enid) {
         if (val){
             draft.entry[enid] = val;
+            updateItemFromShoppingCart(enid);
         }
         else{
             delete draft.entry[enid];
+            removeItemFromShoppingCart(enid);
         }
            
     }
