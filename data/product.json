@@ -1,0 +1,70 @@
+{
+    "1406572988": {
+        "type": "normal-product",
+        "title": "御守",
+        "price": 120,
+        "quantity": 0,
+        "picture": "picture/御守.jpeg",
+        "product_id": "1406572988",
+        "quantity_id": "entry.918817329"
+    },
+    "259046852": {
+        "type": "normal-product",
+        "title": "飲料杯帶",
+        "price": 100,
+        "quantity": 0,
+        "picture": "picture/杯套.jpeg",
+        "product_id": "259046852",
+        "quantity_id": "entry.1230811956"
+        
+    },
+    "304960959": {
+        "type": "normal-product",
+        "title": "托特袋",
+        "price": 200,
+        "quantity": 0,
+        "picture": "picture/托特袋.jpeg",
+        "product_id": "304960959",
+        "quantity_id": "entry.1122819681"
+        
+    },
+    "2051996369": {
+        "type": "normal-product",
+        "title": "貼紙",
+        "price": 60,
+        "quantity": 0,
+        "picture": "picture/貼紙.jpeg",
+        "product_id": "2051996369",
+        "quantity_id": "entry.1946631460"
+        
+    },
+    "1706597056": {
+        "type": "limited-product",
+        "title": "壓克力立繪",
+        "price": 400,
+        "quantity": 0,
+        "picture": "picture/立繪.webp",
+        "product_id": "1706597056",
+        "quantity_id": "entry.1036346855"
+        
+    },
+    "901430140": {
+        "type": "limited-product",
+        "title": "透明書籤",
+        "price": 80,
+        "quantity": 0,
+        "picture": "picture/書籤.jpeg",
+        "product_id": "901430140",
+        "quantity_id": "entry.1797326934"
+        
+    },
+    "1121831062": {
+        "type": "limited-product",
+        "title": "大禮包",
+        "price": 1933,
+        "quantity": 0,
+        "picture": "picture/喜帖.jpeg",
+        "product_id": "1121831062",
+        "quantity_id": "entry.347979567"
+        }
+}
