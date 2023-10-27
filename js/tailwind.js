@@ -9,8 +9,8 @@ $('#download-report').click(function () {
 });
 
 $('#test-report').click(function () {
-    var pdfContext = generatePdfContext();
-    pdfDocument = buildPdf(pdfContext);
+    var data = generatePdfContext();
+    pdfDocument = buildPdf(data);
     openPdf(pdfDocument);
 });
 
@@ -271,7 +271,7 @@ function downloadPdf(pdfDoc){
     pdfMake.createPdf(pdfDoc).download('report.pdf');
 }
 // PDF: Default Styling
-function buildPdf(context) {
+function buildPdf(data) {
     pdfMake.fonts = {
         Roboto: {
           normal: 'Roboto-Regular.ttf',
@@ -295,12 +295,12 @@ function buildPdf(context) {
       };
     var docDefinition = {
       info: {
-        title: 'Details Report',
+        title: 'Report Ref#' + data.id,
         author: 'One And Only One',
         subject: 'MobRei wedding Register Form',
         keywords: 'MobRei Wedding',
     },
-      content: context,
+      content: data.context,
       defaultStyle: {
         font: 'characters',
         fontSize: 11,
@@ -507,7 +507,7 @@ function buildPdf(context) {
 function generatePdfContext(){
     var emailEntry = document.getElementById('Widget658159440').value;
     var nameEntry = document.getElementById('Widget1439048663').value;
-    // var digit3Entry = document.getElementById('Widget981692748').value;
+    var digit3Entry = document.getElementById('Widget981692748').value;
     // var allergyEntry = document.getElementById('Widget1043102370').value;
     // var emergencyEntry = document.getElementById('Widget1827994924').value;
 
@@ -539,7 +539,7 @@ function generatePdfContext(){
     var footerNote = buildPdfNote();
     var context = [
         generatePdfTitle(),
-        generatePdfHeader(emailEntry, nameEntry), 
+        generatePdfHeader(emailEntry, nameEntry, digit3Entry), 
         ...billHeaderContext,
         '\n\n',
         generateSection('茶會報名明細如下：', ''), 
@@ -567,10 +567,10 @@ function generatePdfContext(){
         // '\n\n\n',
         
         ];
-    return context;
+    return {context: context, id: digit3Entry};
 }
 
-// Compress -> to Png -> To Datauri
+// Compress ->  png -> To Datauri
 // https://processing.compress-or-die.com/png-process
 // https://svgtopng.com/
 // https://base64.guru/converter/encode/image/png
@@ -592,7 +592,7 @@ function generatePdfTitle(){
 
 
 // PDF: Header
-function generatePdfHeader(email, name){
+function generatePdfHeader(email, name, refId){
     return {
         columns: [
             // {
@@ -614,10 +614,27 @@ function generatePdfHeader(email, name){
                 // },
                 {
                   stack: [
+                    {
+                        columns: [
+                             {
+                                 text:'', 
+                                 style:'invoiceSubTitle',
+                                 width: '*',
+                                 
+                             }, 
+                             {
+                                 text: 'ref. #' + refId,
+                                 style:'invoiceSubValue',
+                                 width: 100,
+                                 
+                                 
+                             }
+                             ]
+                    },
                        {
                            columns: [
                                 {
-                                    text:'e-mail #', 
+                                    text:'e-mail ', 
                                     style:'invoiceSubTitle',
                                     width: '*',
                                     
@@ -1209,8 +1226,8 @@ function submitForm(frm, secid, callback) {
     if (invalids > 0) return;
     if (this.submitting) return;
     
-    var pdfContext = generatePdfContext();
-    pdfDocument = buildPdf(pdfContext);
+    var data = generatePdfContext();
+    pdfDocument = buildPdf(data);
 
     $.ajax({
         type: 'POST',
