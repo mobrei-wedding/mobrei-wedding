@@ -2477,6 +2477,7 @@ pre {
 #ff-addprd-popup .ff-popup-header .material-icons {
   float: right;
   cursor: pointer;
+  width: .2em;
 }
 
 #ff-addprd-popup .ff-popup-footer {
@@ -3422,177 +3423,6 @@ hr {
 
 /* END MARKDOWN TAGS STYLES */
 
-/* SEARCH SIDEBAR FROM NEARTAIL.CSS STYLES */
-
-#ff-search-overlay {
-  display: none;
-  position: fixed;
-  z-index: 99998;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: all 0.5s ease-in-out;
-}
-
-#ff-search-overlay.active {
-  display: block;
-  opacity: 1;
-}
-
-#ff-search-sidebar {
-  right: -480px;
-  top: 0;
-  width: 380px;
-  height: 100%;
-  position: fixed;
-  overflow: auto;
-  z-index: 99999;
-  background-color: #fff;
-  font-size: 14px;
-  border: 0px solid rgba(0, 0, 0, 0.3);
-  transition: all 0.3s;
-  overflow-y: auto;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-#ff-search-sidebar.active {
-  right: 0;
-}
-
-#ff-search-sidebar .ff-search-header {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 8fr 1fr;
-  border-bottom: solid 0px #000;
-  color: #000;
-  padding: 25px 18px;
-  font-size: 16px;
-  text-align: left;
-}
-
-#ff-search-sidebar .ff-search-noitem .ff-search-title {
-  padding-left: 24px;
-}
-
-#ff-search-sidebar .ff-search-head {
-  font-weight: 500;
-}
-
-:is([dir="ltr"] #ff-search-sidebar .ff-search-head) {
-  padding-left: 18px;
-  text-align: left;
-}
-
-:is([dir="rtl"] #ff-search-sidebar .ff-search-head) {
-  padding-right: 18px;
-  text-align: right;
-}
-
-#ff-search-sidebar .ff-search-icon {
-  font-size: 22px;
-}
-
-#ff-search-sidebar #ff-search-text {
-  border: solid 0px #000;
-}
-
-#ff-search-sidebar #ff-search-text:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-#ff-search-sidebar .ff-search-close {
-  text-align: right;
-  color: #000;
-}
-
-#ff-search-sidebar .material-icons {
-  text-decoration: none;
-  line-height: 24px;
-  color: #000;
-}
-
-#ff-search-sidebar ul {
-  padding: 0px;
-  color: #000;
-}
-
-#ff-search-sidebar #ff-search-categories li {
-  padding-left: 18px;
-  padding-right: 18px;
-  padding-top: 8px;
-  padding-bottom: 10px;
-  list-style-type: none;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 2fr 8fr;
-}
-
-#ff-search-sidebar #ff-search-items li {
-  padding-left: 18px;
-  padding-right: 18px;
-  padding-top: 8px;
-  padding-bottom: 10px;
-  list-style-type: none;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: 2fr 7fr 1fr;
-}
-
-#ff-search-sidebar ul li:hover {
-  background-color: #F6F6F7;
-}
-
-:is([dir="ltr"] #ff-search-sidebar ul li .ff-search-title) {
-  text-align: left;
-}
-
-:is([dir="rtl"] #ff-search-sidebar ul li .ff-search-title) {
-  text-align: right;
-}
-
-#ff-search-sidebar ul li .ff-search-title {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-}
-
-#ff-search-sidebar ul li .ff-search-altimage {
-  text-align: left;
-  padding-left: 8px;
-  font-size: 42px;
-  line-height: 46px;
-}
-
-#ff-search-sidebar ul li .ff-search-image {
-  text-align: left;
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 55px;
-  height: 55px;
-}
-
-#ff-search-sidebar ul li .ff-search-edit {
-  text-align: right;
-}
-
-#ff-search-sidebar ul li .ff-search-quantity {
-  text-align: left;
-  line-height: 18px;
-  font-size: 12px;
-  color: #666;
-}
-
-@media only screen and (max-device-width: 480px) {
-  #ff-search-sidebar {
-    width: 100%;
-  }
-}
-
-/* END SEARCH SIDEBAR FROM NEARTAIL.CSS STYLES */
 
 .ff-edit-mode .ff-section {
   padding: 1.5em !important;
@@ -3705,71 +3535,11 @@ hr {
   font-size: calc(var(--ff-fs) / 1.15) !important;
 }
 
-/* SIGNATURE STYLES */
-
-.ff-form .ff-signature {
-  padding-top: .75em;
-  background-color: var(--ff-field-bgcolor);
-  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-  position: relative;
-  /* height: 240px; */
-  border: .15em dashed #ccc;
-  margin-top: .75em;
-  border-radius: 0.375em
-}
-
-.ff-form .ff-signature:focus-within {
-  border-style: solid;
-  border-color: var(--ff-primary-700);
-}
-
-.ff-form .ff-signature:hover {
-  opacity: 0.8;
-}
-
-.ff-form .ff-signature:focus {
-  border-style: solid;
-  border-color: var(--ff-primary-700);
-}
-
-.ff-form .ff-signature:active {
-  border-style: solid;
-  border-color: var(--ff-primary-700);
-}
-
-:is(.dark .ff-form .ff-signature) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(212 212 216 / var(--tw-bg-opacity));
-}
-
-.ff-form .ff-signature .sign_clear {
-  padding: 10px 10px 2px 10px;
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  cursor: pointer;
-  font-size: 1em;
-  line-height: 1.5em;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-:is(.dark .ff-form .ff-signature .sign_clear) {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.ff-form .ff-signature hr {
-  margin-top: -0.625rem;
-  border-top-color: rgb(0 0 0 / 15%);
-}
-
-/* END SIGNATURE STYLES */
 
 /* SUCCESS MESSAGE PROMPT STYLES */
 
 
-    .ff-linear-scale-default-container td.ff-cta-center {
+.ff-linear-scale-default-container td.ff-cta-center {
   cursor: pointer;
 }
 
