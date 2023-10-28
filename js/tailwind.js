@@ -1249,9 +1249,10 @@ function getUserEmail(){
 }
 
 function connectGoogleForm(formData, email){
+    // https://docs.google.com/forms/u/8/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse
     return $.ajax({
         type: 'POST',
-        url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
+        url: 'https://docs.google.com/forms/u/8/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
         data: formData,
         contentType: 'application/json',
         jsonpCallback: 'processJSONPResponse', 
@@ -1261,7 +1262,7 @@ function connectGoogleForm(formData, email){
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
             }else{
-                console.log("v2.1 Submit Data!")
+                console.log("v2.2 Submit Data!")
             }
         },
         complete: function() {
