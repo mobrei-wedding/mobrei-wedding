@@ -1254,8 +1254,7 @@ function connectGoogleForm(formData, email){
         cache: false,
         error: function (errMsg) {
             if(errMsg.status!= 200){
-                console.log(errMsg);
-                alert('資料無法送出...');
+                console.log("not 200:", errMsg);
             }
             endSection();
         },
