@@ -23,6 +23,17 @@ function sendPdfToEmail(receiver){
    });
 }
 
+function returnSendPdfToEmailPromise(receiver){
+    var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
+    var pdfDocObj = pdfDocGenerator.getBase64((data) => {
+    });
+    return pdfDocObj.then(function(result) {
+    //    return returnSendEmailPromise(result, receiver);
+        console.log("Attachment");
+        sendEmail(result, receiver);
+   });
+}
+
 function updateBillVars(productTotalSum, productTotalQuantity, totalPrice){
     // id and entry
     var productSumEle = document.getElementById("ff-id-2046362136");
@@ -180,7 +191,7 @@ function endSection() {
 function pdfHeader(title){
     return  { 
         alignment: 'center',
-        text: `Report #${title}`,
+        text: `MobReiWedding#${title} Details`,
         style: 'header',
         fontSize: 23,
         bold: true,
@@ -295,7 +306,7 @@ function buildPdf(data) {
       };
     var docDefinition = {
       info: {
-        title: 'Report Ref#' + data.id,
+        title: 'MobReiWedding Ref#' + data.id,
         author: 'One And Only One',
         subject: 'MobRei wedding Register Form',
         keywords: 'MobRei Wedding',
@@ -1221,7 +1232,6 @@ function getData(){
         else {
             value = $(`[name="${name}"]`).val() || '';
         }
-        console.log("entry:", name, "value:", value);
         dataSet[name] = value;
 
     })
@@ -1234,6 +1244,38 @@ function getUserEmail(){
     return email;
 }
 
+function connectGoogleForm(formData, email){
+    return $.ajax({
+        type: 'POST',
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
+        data: formData,
+        contentType: 'application/json',
+        dataType: 'jsonp',
+        cache: false,
+        error: function (errMsg) {
+            if(errMsg.status!= 200){
+                console.log(errMsg);
+                alert('資料無法送出...');
+            }
+            endSection();
+        },
+        complete: function() {
+            endSection();
+            // sendPdfToEmail(email);
+            alert('資料已送出！');
+        },
+    })
+    // always(function() {
+    //     endSection();
+    //     console.log("Always");
+    //     // remove loading image maybe
+    //   })
+}
+function consoleAlertSuccess(){
+    console.log("資料成功送出！")
+    alert("資料成功送出")
+}
+
 function submitForm(frm, secid, callback) {
     var invalids = secid == '-3' ? 0 : validate(frm, secid);
     if (invalids > 0) return;
@@ -1244,21 +1286,19 @@ function submitForm(frm, secid, callback) {
     var formData = getData()
     var email = getUserEmail()
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
+    console.log("Subtmit Data!");
 
-    $.ajax({
-        type: 'POST',
-        url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
-        data: formData,
-        contentType: 'application/json',
-        dataType: 'jsonp',
-        complete: function() {
-            alert('資料已送出！');
-            endSection();
-            sendPdfToEmail(email);
-        }
+    $.when(connectGoogleForm(formData, email), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
+        // the code here will be executed when all four ajax requests resolve.
+        // a1, a2, a3 and a4 are lists of length 3 containing the response text,
+        // status, and jqXHR object for each of the four ajax calls respectively.
+        console.log("connectGoogleForm:", a1);
+        console.log("returnSendEmailPromise:", a2);
+        consoleAlertSuccess();
     });
+    
 
-    return false;
+    // return false;
 }
 
 function scrollIntoView(elm) {
