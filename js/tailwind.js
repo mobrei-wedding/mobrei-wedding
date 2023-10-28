@@ -1260,7 +1260,7 @@ function connectGoogleForm(formData, email){
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
             }else{
-                console.log("Submit Data!")
+                console.log("v2. Submit Data!")
             }
         },
         complete: function() {
@@ -1268,11 +1268,6 @@ function connectGoogleForm(formData, email){
             // sendPdfToEmail(email);
         },
     })
-    // always(function() {
-    //     endSection();
-    //     console.log("Always");
-    //     // remove loading image maybe
-    //   })
 }
 function consoleAlertSuccess(){
     console.log("資料成功送出！")
@@ -1781,15 +1776,20 @@ this.saveDraft = function() {
 
 
 this.closePopup = function (render = true) {
-    document.body.style.overflowY = 'auto';
-    var overlay = document.getElementById('ff-addprd-overlay');
-    overlay.classList.remove('active');
-    var popup = document.getElementById('ff-addprd-popup');
-    popup.classList.remove('active');
-    popup.classList.remove('ff-consent-confirm');
-    // setTimeout(function () {
-    //     if (render) formFacade.render();
-    // }, 10);
+    try{
+        document.body.style.overflowY = 'auto';
+        var overlay = document.getElementById('ff-addprd-overlay');
+        overlay.classList.remove('active');
+        var popup = document.getElementById('ff-addprd-popup');
+        popup.classList.remove('active');
+        popup.classList.remove('ff-consent-confirm');
+        // setTimeout(function () {
+        //     if (render) formFacade.render();
+        // }, 10);
+    }catch{
+        console.error("close pop error")
+    }
+    
 }
 
 this.renderProduct = function (enid, val) {
