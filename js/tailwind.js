@@ -1254,13 +1254,14 @@ function connectGoogleForm(formData, email){
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse',
         data: formData,
         contentType: 'application/json',
+        jsonpCallback: 'processJSONPResponse', 
         dataType: 'jsonp',
         cache: false,
         error: function (errMsg) {
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
             }else{
-                console.log("v2. Submit Data!")
+                console.log("v2.1 Submit Data!")
             }
         },
         complete: function() {
