@@ -183,7 +183,11 @@ function endSection() {
         if(section.id==="ending"){
             sectionDiv.style.display = "block";
         }else{
-            sectionDiv.remove();
+            $(`#${id}`).remove();
+            // if(sectionDiv){
+            //     sectionDiv.remove();
+            // }
+            
         }
     })
 }
@@ -1255,13 +1259,13 @@ function connectGoogleForm(formData, email){
         error: function (errMsg) {
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
+            }else{
+                console.log("Submit Data!")
             }
-            endSection();
         },
         complete: function() {
             endSection();
             // sendPdfToEmail(email);
-            alert('資料已送出！');
         },
     })
     // always(function() {
@@ -1285,7 +1289,7 @@ function submitForm(frm, secid, callback) {
     var formData = getData()
     var email = getUserEmail()
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
-    console.log("Subtmit Data!");
+    // console.log("Subtmit Data!");
 
     $.when(connectGoogleForm(formData, email), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
         // the code here will be executed when all four ajax requests resolve.
