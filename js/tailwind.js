@@ -279,7 +279,8 @@ function getBillData(){
 }
 
 function openPdf(pdfDoc){
-    pdfMake.createPdf(pdfDoc).open();
+    // pdfMake.createPdf(pdfDoc).open();
+    pdfMake.createPdf(pdfDoc).open({}, window);
 }
 
 function downloadPdf(pdfDoc){
