@@ -4025,3 +4025,9 @@ hr {
 .copyright {
   margin: 2em;
 }
+
+.inline-bold { 
+  display: inline;
+  font-weight: 800 !important;
+  color: red;
+}
