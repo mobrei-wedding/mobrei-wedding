@@ -4,8 +4,8 @@ $(document).ready(function() {
  });
 
 $('#download-report').click(function () {
-    downloadPdf(pdfDocument);
-    // openPdf(pdfDocument);
+    // downloadPdf(pdfDocument);
+    openPdf(pdfDocument);
 });
 
 $('#test-report').click(function () {
