@@ -1221,7 +1221,12 @@ function getData(){
             var checkeVal = function() {
                 var v;
                 $(`[name="${name}"]`).each(function() {
-                    if($(this).prop('checked') === true) v = $(this).val();
+                    if($(this).prop('checked') === true) {
+                        v = $(this).val();
+                        if(v==="__other_option__"){
+                            v=$(`input[name="${name}.other_option_response"]`).val();
+                        }
+                    }
                 });
                 return v;
                 };
@@ -1241,6 +1246,7 @@ function getData(){
     })
   })
   dataSet['pageHistory'] = '0,1';
+  console.log(dataSet);
   return dataSet;
 }
 function getUserEmail(){
