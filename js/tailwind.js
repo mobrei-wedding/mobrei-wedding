@@ -1247,7 +1247,6 @@ function getData(){
     })
   })
   dataSet['pageHistory'] = '0,1';
-  console.log(dataSet);
   return dataSet;
 }
 function getUserEmail(){
