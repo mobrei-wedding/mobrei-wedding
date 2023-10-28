@@ -1225,12 +1225,12 @@ function getData(){
                     if($(this).prop('checked') === true) {
                         v = $(this).val();
                         if(v==="__other_option__"){
-                            v=$(`input[name="${name}.other_option_response"]`).val();
+                            dataSet[`${name}.other_option_response`] = $(`input[name="${name}.other_option_response"]`).val();
                         }
                     }
                 });
                 return v;
-                };
+            };
             value = checkeVal();
         }else if(item.entryType=="custom"){
             value = product_data[item.id].quantity;
