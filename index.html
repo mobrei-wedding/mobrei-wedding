@@ -28,8 +28,15 @@ window.onload = (event) => {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isInApp = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.toLowerCase().indexOf("line") > -1) || (ua.toLowerCase().indexOf("instagram") > -1);
   if(isInApp){
-    alert("建議用瀏覽器(Safari/Chrome ...etc)填寫喔！");
+    // alert("建議用瀏覽器(Safari/Chrome ...etc)填寫喔！");
     var url = "https://mobrei-wedding.github.io/mobrei-wedding";
+    if (confirm('建議用瀏覽器(Safari/Chrome ...etc)填寫喔！')) {
+     // Save it!
+      console.log('Thing was saved to the database.');
+    } else {
+      // Do nothing!
+      console.log('Thing was not saved to the database.');
+    }
     window.open(url, "_system");
 
   }
