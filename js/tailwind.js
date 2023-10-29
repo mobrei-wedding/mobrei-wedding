@@ -3,6 +3,8 @@ $(document).ready(function() {
     renderBill();
  });
 
+
+
 $('#download-report').click(function () {
     downloadPdf(pdfDocument);
     // openPdf(pdfDocument);
@@ -1306,29 +1308,44 @@ function consoleAlertSuccess(){
     alert("資料成功送出")
 }
 
+$('#ff-submit-1194002809').bind('click', function() {
+    //   disable 
+    console.log("disable button");
+    $('#ff-submit-1194002809').prop('disabled', true);
+    
+        setTimeout(function() {
+            $('#ff-submit-1194002809').prop('disabled', false);
+    }, 10000);
+  });
+
 function submitForm(frm, secid, callback) {
     var invalids = secid == '-3' ? 0 : validate(frm, secid);
     if (invalids > 0) return;
     if (this.submitting) return;
-    
+
+
+
     var pdfData = generatePdfContext();
     pdfDocument = buildPdf(pdfData);
     var formData = getData()
     var email = getUserEmail()
-// https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
+// https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw   
+// disable the prop
+ 
 
 
     useFetch(formData).then((data) => {
         console.log("Submit Successfully!")
         endSection();
+        consoleAlertSuccess();
         var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
         var pdfDocObj = pdfDocGenerator.getBase64((data) => {
         });
         pdfDocObj.then(function(result) {
-            asyncSendEmail(result, email).then((message)=>{
-                console.log("Send SMTP Email:", message);
-                consoleAlertSuccess();
-            });
+            // asyncSendEmail(result, email).then((message)=>{
+            //     console.log("Send SMTP Email:", message);
+            //     consoleAlertSuccess();
+            // });
        });
         
     });
