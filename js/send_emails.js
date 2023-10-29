@@ -1,3 +1,7 @@
+$(document).ready(function() { 
+    emailjs.init('gt72hy3XqGNZiXC5e');
+ });
+
 // function sendEmail() {
     
 // 	Email.send({
@@ -13,6 +17,55 @@
 // 		message => console.log("message:", message)
 // 	);
 // }
+
+function sendEmailJs(attachment, receiver){
+	
+
+	// emailjs.send('service_wkocoeq', 'template_p7cwsbo', {
+	// 	content: attachment
+	// });
+
+
+	var data = {
+		service_id: 'service_wkocoeq',
+		template_id: 'template_p7cwsbo',
+		user_id: 'gt72hy3XqGNZiXC5e',
+		// content: attachment,
+		template_params: {
+			'receiver': receiver,
+			'guestEmail': receiver,
+			'g-recaptcha-response': '6Ld3bNsoAAAAAInnlwfrl8Lgx3W7_h33spa_Vk8H'
+		}
+	};
+
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+        type: 'POST',
+        data: data,
+        contentType: false, // auto-detection
+        processData: false // no need to parse formData to string
+    }).done(function() {
+        alert('Your mail is sent!');
+    }).fail(function(error) {
+        alert('Oops... ' + JSON.stringify(error));
+    });
+
+	
+
+	// $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+	// 	type: 'POST',
+	// 	data: JSON.stringify(data),
+	// 	contentType: 'application/json'
+	// }).done(function() {
+	// 	alert('Your mail is sent!');
+	// }).fail(function(error) {
+	// 	alert('Oops... ' + JSON.stringify(error));
+	// });
+
+	// emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+    //     content: base64
+    // });
+	
+}
 
 function sendEmail(attachment, receiver) {
 	// https://support.google.com/a/answer/2956491?sjid=14902451573699173167-EU
