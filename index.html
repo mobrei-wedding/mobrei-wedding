@@ -28,7 +28,7 @@ window.onload = (event) => {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
   var isInApp = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.toLowerCase().indexOf("line") > -1) || (ua.toLowerCase().indexOf("instagram") > -1);
   if(isInApp){
-    window.open("https://mobrei-wedding.github.io/mobrei-wedding", "_system");
+    window.open("https://mobrei-wedding.github.io/mobrei-wedding?gbOpenExternal=1", "_blank");
   }
 };
 
@@ -1425,23 +1425,23 @@ window.onload = (event) => {
               </div>
 
 
-              <div class="ff-section" id="ff-sec-ending" style="display:none">
-                <h4 class="ff-section-header" >
-                  one and only one: 茂靈婚禮茶會報名
-                </h4>
-                <br>
-                <p style="padding-bottom:80px; margin-top: 3em;">報名資訊已寄送至您的信箱（若未發現請至垃圾桶查找）。<br>感謝您的填寫，期待與您相會！</p>
-                <button type="button" class="rest-btn rest-btn-lg rest-btn-primary ff-submit"
-                id="download-report">
-                <span>
-                  下載明細
-                </span>
-              </button>
-
-              </div>
+              
 
             </form>
+            <div class="ff-section" id="ff-sec-ending" style="display:none">
+              <h4 class="ff-section-header" >
+                one and only one: 茂靈婚禮茶會報名
+              </h4>
+              <br>
+              <p style="padding-bottom:80px; margin-top: 3em;">購買明細已寄送至您的信箱（若未發現請至<span class="inline-bold">垃圾信件</span>查找），若未收到信件，可聯絡主辦單位（信箱、噗浪、臉書皆可）。<br>感謝您的填寫，期待與您相會！</p>
+              <button type="button" class="rest-btn rest-btn-lg rest-btn-primary ff-submit"
+              id="download-report">
+              <span>
+                查看明細
+              </span>
+            </button>
 
+            </div>
 
             <div id="ff-addprd-overlay" onclick="closePopup()"></div>
  
