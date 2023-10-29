@@ -1267,8 +1267,10 @@ function connectGoogleForm(formData, email){
         error: function (errMsg) {
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
+                alert("errorMsg", errMsg);
             }else{
                 console.log("v2.3 Submit Data!")
+                alert("submit succeed!");
             }
         },
         complete: function() {
