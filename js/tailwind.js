@@ -1319,20 +1319,22 @@ function submitForm(frm, secid, callback) {
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
 
 
-    // useFetch(formData).then((data) => {
-    //     console.log(data); 
-    //     alert("test data:", data);
-    // });
-
-    $.when(useFetch(formData), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
-        // the code here will be executed when all four ajax requests resolve.
-        // a1, a2, a3 and a4 are lists of length 3 containing the response text,
-        // status, and jqXHR object for each of the four ajax calls respectively.
-        // console.log("returnForm:", a1);
-        // console.log("returnSendEmailPromise:", a2);
+    useFetch(formData).then((data) => {
+        // console.log(data); 
         endSection();
         consoleAlertSuccess();
+        returnSendPdfToEmailPromise(email)
     });
+
+    // $.when(useFetch(formData), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
+    //     // the code here will be executed when all four ajax requests resolve.
+    //     // a1, a2, a3 and a4 are lists of length 3 containing the response text,
+    //     // status, and jqXHR object for each of the four ajax calls respectively.
+    //     // console.log("returnForm:", a1);
+    //     // console.log("returnSendEmailPromise:", a2);
+    //     endSection();
+    //     consoleAlertSuccess();
+    // });
     
 
     // return false;
