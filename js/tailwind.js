@@ -1342,10 +1342,10 @@ function submitForm(frm, secid, callback) {
         var pdfDocObj = pdfDocGenerator.getBase64((data) => {
         });
         pdfDocObj.then(function(result) {
-            // asyncSendEmail(result, email).then((message)=>{
-            //     console.log("Send SMTP Email:", message);
-            //     consoleAlertSuccess();
-            // });
+            asyncSendEmail(result, email).then((message)=>{
+                console.log("Send SMTP Email:", message);
+                consoleAlertSuccess();
+            });
        });
         
     });
