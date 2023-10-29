@@ -15,32 +15,26 @@
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://cdn.com/" crossorigin="">
   <link rel="preconnect" href="https://com/" crossorigin="">
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+ <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+ <script>
 
+  window.onload = (event) => {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var isInApp = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.toLowerCase().indexOf("line") > -1) || (ua.toLowerCase().indexOf("instagram") > -1);
+    if(isInApp){
+      alert("建議用瀏覽器(Safari/Chrome ...etc)填寫喔！");
+      var url = "https://mobrei-wedding.github.io/mobrei-wedding";
+      window.open(url, "_system");
+
+    }
+
+};
+</script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-HRY7841NFE');
-
-
-
-
-window.onload = (event) => {
-  
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  var isInApp = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.toLowerCase().indexOf("line") > -1) || (ua.toLowerCase().indexOf("instagram") > -1);
-  if(isInApp){
-    alert("建議用瀏覽器(Safari/Chrome ...etc)填寫喔！");
-    var url = "https://mobrei-wedding.github.io/mobrei-wedding";
-    window.open(url, "_system");
-
-  }
-
-};
-
-
-
     window.onerror = function (msg, url, lineNo, columnNo, error) {
       var string = msg.toLowerCase();
       var substring = 'script error';
@@ -1465,8 +1459,8 @@ window.onload = (event) => {
 
     </section>
 
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script src="js/send_emails.js"></script>
+    <script defer src="https://smtpjs.com/v3/smtp.js"></script>
+    <script defer src="js/send_emails.js"></script>
 
     <!-- <button id="test-report">12s</button> -->
     <!-- <button id="test-getFormdata" onclick="getData()">GET Data</button> -->
@@ -1488,16 +1482,15 @@ window.onload = (event) => {
 
   </div>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
-  <script type="text/javascript" src="./js/pdfmake/pdfmake.js" type="text/javascript"></script>
-  <script type="text/javascript" src="./js/pdfmake/vfs_fonts.js" type="text/javascript"></script> 
-  <script
+  <script defer type="text/javascript" src="./js/pdfmake/pdfmake.js" type="text/javascript"></script>
+  <script defer type="text/javascript" src="./js/pdfmake/vfs_fonts.js" type="text/javascript"></script> 
+  <script defer
   data-main="js/tailwind.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" ></script>
-  <!-- <script src="js/custom_post_api.js"></script> -->
 
-  <script src="js/jquery-2.1.4.min.js"></script>
+  <script defer src="js/jquery-2.1.4.min.js"></script>
   <!-- <script src="js/bootstrap.min.js"></script> -->
-  <script src="js/scripts.js"></script>
-  <script src="https://apis.google.com/js/api.js"></script>
+  <script defer src="js/scripts.js"></script>
+  <script defer src="https://apis.google.com/js/api.js"></script>
 
 
 

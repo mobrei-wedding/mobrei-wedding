@@ -1337,7 +1337,6 @@ function submitForm(frm, secid, callback) {
     useFetch(formData).then((data) => {
         console.log("Submit Successfully!")
         endSection();
-        consoleAlertSuccess();
         var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
         var pdfDocObj = pdfDocGenerator.getBase64((data) => {
         });
