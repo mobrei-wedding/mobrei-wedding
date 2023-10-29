@@ -23,6 +23,18 @@
   gtag('js', new Date());
   gtag('config', 'G-HRY7841NFE');
 
+  dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        close: function() {
+          dialog.dialog( "close" );
+       }
+      }
+    });
+
 
 window.onload = (event) => {
   var ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -30,13 +42,7 @@ window.onload = (event) => {
   if(isInApp){
     // alert("建議用瀏覽器(Safari/Chrome ...etc)填寫喔！");
     var url = "https://mobrei-wedding.github.io/mobrei-wedding";
-    if (confirm('建議用瀏覽器(Safari/Chrome ...etc)填寫喔！')) {
-     // Save it!
-      console.log('Thing was saved to the database.');
-    } else {
-      // Do nothing!
-      console.log('Thing was not saved to the database.');
-    }
+    dialog.dialog( "open" );
     window.open(url, "_system");
 
   }
@@ -173,7 +179,12 @@ window.onload = (event) => {
   <link rel="stylesheet" id="/css/output.css" href="./css/output.css">
 </head>
 
+
 <body class="font">
+  <div id="dialog" title="小叮嚀">
+    <p>建議用瀏覽器(Safari/Chrome ...etc)填寫喔！</p>
+  </div>
+  
   <div class="page-wrapper">
     <section id="pageform" class="noUi-background"
       style=" background-size:contain; background-position:center top;background-repeat:no-repeat;">
