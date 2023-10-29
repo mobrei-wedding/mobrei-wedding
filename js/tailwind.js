@@ -28,7 +28,6 @@ function returnSendPdfToEmailPromise(receiver){
     var pdfDocObj = pdfDocGenerator.getBase64((data) => {
     });
     return pdfDocObj.then(function(result) {
-    //    return returnSendEmailPromise(result, receiver);
         console.log("Attachment");
         sendEmail(result, receiver);
    });
@@ -1320,18 +1319,24 @@ function submitForm(frm, secid, callback) {
 
 
     useFetch(formData).then((data) => {
-        // console.log(data); 
+        console.log("Submit Successfully!")
         endSection();
-        consoleAlertSuccess();
-        returnSendPdfToEmailPromise(email)
+        var pdfDocGenerator = pdfMake.createPdf(pdfDocument);
+        var pdfDocObj = pdfDocGenerator.getBase64((data) => {
+        });
+        pdfDocObj.then(function(result) {
+            asyncSendEmail(result, email).then((message)=>{
+                console.log("Send SMTP Email:", message);
+                consoleAlertSuccess();
+            });
+       });
+        
     });
 
     // $.when(useFetch(formData), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
     //     // the code here will be executed when all four ajax requests resolve.
     //     // a1, a2, a3 and a4 are lists of length 3 containing the response text,
     //     // status, and jqXHR object for each of the four ajax calls respectively.
-    //     // console.log("returnForm:", a1);
-    //     // console.log("returnSendEmailPromise:", a2);
     //     endSection();
     //     consoleAlertSuccess();
     // });
