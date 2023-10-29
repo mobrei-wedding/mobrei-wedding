@@ -54,7 +54,7 @@ function sendEmail(attachment, receiver) {
 			Password : "7769F2AADB8EE88FC35B999978B83D094B26",
 			To : receiver,
 			From : "mobrei.wedding@gmail.com",
-			// Bcc : ["mobrei.wedding@gmail.com"],
+			Bcc : ["mobrei.wedding@gmail.com"],
 			Subject : subject,
 			Body : `賓客您好，<br>茂靈2539婚禮茶會的籌備組已收到您的報名，附件為您的報名購買明細，主辦方與您各持有一份，此信為系統自動寄信，不需回覆。<br><br>
 			若成功報名且茶會確定舉行，主辦方將寄送匯款通知信，再請您留意信箱，感謝您。<br><br>
