@@ -1254,6 +1254,29 @@ function getUserEmail(){
     return email;
 }
 
+async function useFetch(formData){
+    var url = 'https://docs.google.com/forms/u/8/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse';
+    var encodedData = new URLSearchParams(Object.entries(formData)).toString();
+    
+    const response =  await fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "no-cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        // credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Content-Type": "application/x-www-form-urlencoded",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        }, // manual, *follow, error
+        Referer: "https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: encodedData, // body data type must match "Content-Type" header
+      });
+    return response;
+}
+
 function connectGoogleForm(formData, email){
     // https://docs.google.com/forms/u/8/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw/formResponse
     return $.ajax({
@@ -1267,7 +1290,7 @@ function connectGoogleForm(formData, email){
         error: function (errMsg) {
             if(errMsg.status!= 200){
                 console.log("not 200:", errMsg);
-                alert("errorMsg", errMsg);
+                alert("error:", errMsg);
             }else{
                 console.log("v2.3 Submit Data!")
                 alert("submit succeed!");
@@ -1294,14 +1317,20 @@ function submitForm(frm, secid, callback) {
     var formData = getData()
     var email = getUserEmail()
 // https://docs.google.com/forms/d/e/1FAIpQLSdfsLWjzLUKRZRxsUbiJNuverhidV76_VuR3GK2YFr_pkxiNw
-    // console.log("Subtmit Data!");
 
-    $.when(connectGoogleForm(formData, email), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
+
+    // useFetch(formData).then((data) => {
+    //     console.log(data); 
+    //     alert("test data:", data);
+    // });
+
+    $.when(useFetch(formData), returnSendPdfToEmailPromise(email)).done(function(a1, a2){
         // the code here will be executed when all four ajax requests resolve.
         // a1, a2, a3 and a4 are lists of length 3 containing the response text,
         // status, and jqXHR object for each of the four ajax calls respectively.
-        console.log("connectGoogleForm:", a1);
-        console.log("returnSendEmailPromise:", a2);
+        // console.log("returnForm:", a1);
+        // console.log("returnSendEmailPromise:", a2);
+        endSection();
         consoleAlertSuccess();
     });
     
