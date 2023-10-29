@@ -1,4 +1,4 @@
-
+// https://jscompress.com/
 $(document).ready(function() { 
     renderBill();
  });
