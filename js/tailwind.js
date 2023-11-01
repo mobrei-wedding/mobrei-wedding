@@ -1052,12 +1052,12 @@ function getSectionsItems(){
                 "entryType": "radio",
                 "entryId": "1841292804"
             },
-            {
-                // little helper
-                "id": "36699560",
-                "entryType": "radio",
-                "entryId": "1339607071"
-            },
+            // {
+            //     // little helper
+            //     "id": "36699560",
+            //     "entryType": "radio",
+            //     "entryId": "1339607071"
+            // },
             {
                 // payment method
                 "id": "895429393",
